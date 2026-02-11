@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Copy, Check } from "lucide-react";
 
-const CONTRACT_ADDRESS = "0x0000000000000000000000000000000000000000";
+const CONTRACT_ADDRESS = "BEGbkiLDZSmjXtRzypLs6GGJaxdfYeVEuFvr3KJDpump";
 
 export function ContractAddress() {
   const [copied, setCopied] = useState(false);
