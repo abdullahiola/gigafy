@@ -36,20 +36,18 @@ export async function POST(req: NextRequest) {
     const base64 = buffer.toString("base64");
     const dataUri = `data:${mimeType};base64,${base64}`;
 
-    // Use google/imagen-4 to generate a GigaChad transformation
-    // We send the original image as reference and prompt for a GigaChad version
-    const output = await replicate.run("google/imagen-4", {
+    // Use flux-kontext-pro to edit the image while preserving the person's likeness
+    const output = await replicate.run("black-forest-labs/flux-kontext-pro", {
       input: {
         prompt:
-          "Transform this person into a hyper-masculine GigaChad meme version. " +
+          "Transform this person into a hyper-masculine GigaChad meme version " +
+          "while keeping the same facial features and identity. " +
           "Give them an extremely chiseled jawline, prominent cheekbones, " +
           "deep-set intense eyes, thick eyebrows, a perfectly sculpted face, " +
-          "and a strong muscular neck. Keep the same general pose and background " +
-          "but make the person look like the iconic GigaChad meme (Ernest Khalimov). " +
+          "and a strong muscular neck. Keep the same pose, expression, and background. " +
           "Photorealistic, cinematic lighting, dramatic shadows, sharp focus.",
-        image: dataUri,
+        input_image: dataUri,
         aspect_ratio: "1:1",
-        safety_filter_level: "block_only_high",
       },
     });
 

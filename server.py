@@ -50,23 +50,22 @@ def gigafy():
         b64 = base64.b64encode(image_bytes).decode("utf-8")
         data_uri = f"data:{mime_type};base64,{b64}"
 
-        logger.info("Running google/imagen-4 via Replicate …")
+        logger.info("Running flux-kontext-pro via Replicate …")
 
-        # Run google/imagen-4 via Replicate
+        # Run flux-kontext-pro via Replicate (preserves likeness)
         output = replicate.run(
-            "google/imagen-4",
+            "black-forest-labs/flux-kontext-pro",
             input={
                 "prompt": (
-                    "Transform this person into a hyper-masculine GigaChad meme version. "
+                    "Transform this person into a hyper-masculine GigaChad meme version "
+                    "while keeping the same facial features and identity. "
                     "Give them an extremely chiseled jawline, prominent cheekbones, "
                     "deep-set intense eyes, thick eyebrows, a perfectly sculpted face, "
-                    "and a strong muscular neck. Keep the same general pose and background "
-                    "but make the person look like the iconic GigaChad meme (Ernest Khalimov). "
+                    "and a strong muscular neck. Keep the same pose, expression, and background. "
                     "Photorealistic, cinematic lighting, dramatic shadows, sharp focus."
                 ),
-                "image": data_uri,
+                "input_image": data_uri,
                 "aspect_ratio": "1:1",
-                "safety_filter_level": "block_only_high",
             },
         )
 
